@@ -1,6 +1,7 @@
 {% extends 'flatpages/default.html' %}
 
 {% load my_filters %}
+{% load my_tags %}
 
 {% block title %}
 All News
@@ -8,7 +9,7 @@ All News
 
 {% block content %}
     <h1> Hot News </h1>
-    <h4> News Amount: {{ news|length }} </h4>
+    <h4> News Amount: {{ paginator.count }} </h4>
     <hr>
 
     {% if news %}
@@ -25,4 +26,24 @@ All News
         <h2> There is no news... </h2>
 
     {% endif %}
+
+
+    {% if page_obj.has_previous %}
+        <a href="?{% url_replace page=1 %}">1</a>
+        {% if page_obj.previous_page_number != 1 %}
+            ...
+            <a href="?{% url_replace page=page_obj.previous_page_number %}">{{ page_obj.previous_page_number }}</a>
+        {% endif %}
+    {% endif %}
+
+    {{ page_obj.number }}
+
+    {% if page_obj.has_next %}
+        <a href="?{% url_replace page=page_obj.next_page_number %}">{{ page_obj.next_page_number }}</a>
+        {% if paginator.num_pages != page_obj.next_page_number %}
+            ...
+            <a href="?{% url_replace page=page_obj.paginator.num_pages %}">{{ page_obj.paginator.num_pages }}</a>
+        {% endif %}
+    {% endif %}
+
 {% endblock content %}
