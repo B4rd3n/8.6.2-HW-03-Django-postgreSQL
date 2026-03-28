@@ -1,4 +1,4 @@
-from django.views.generic import ListView, DetailView, CreateView
+from django.views.generic import ListView, DetailView, CreateView, UpdateView
 from .filters import PostFilter
 from .forms import PostForm
 
@@ -35,12 +35,44 @@ class SearchNews(NewsList):
     template_name = 'search_news.html'
 
 
-class CreateArticle(CreateView):
+class CreateContent(CreateView):
     form_class = PostForm
     model = Post
-    template_name = 'edit_article.html'
+    template_name = 'edit_article_and_news.html'
+    type_of_content = ''
 
     def form_valid(self, form):
         article = form.save(commit=False)
-        article.content_type = 'AT'
+        article.content_type = self.type_of_content
         return super().form_valid(form)
+
+class CreateArticles(CreateContent):
+    type_of_content = 'AT'
+
+
+class CreateNews(CreateContent):
+    type_of_content = 'NW'
+
+
+class UpdateContent(UpdateView):
+    form_class = PostForm
+    model = Post
+    template_name = ''
+    type_of_content = ''
+
+    def get_queryset(self):
+        return Post.objects.filter(content_type = self.type_of_content)
+
+
+class UpdateArticles(UpdateContent):
+    template_name = 'edit_article_and_news.html'
+    type_of_content = 'AT'
+
+
+
+class UpdateNews(UpdateContent):
+    template_name = 'edit_article_and_news.html'
+    type_of_content = 'NW'
+
+
+
