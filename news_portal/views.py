@@ -1,8 +1,11 @@
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.urls import reverse_lazy
-from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView, TemplateView
 from .filters import PostFilter
 from .forms import PostForm
+from .models import Author
+from django.shortcuts import redirect
+from django.contrib.auth.models import Group
 
 from .models import Post
 
@@ -37,7 +40,9 @@ class SearchNews(NewsList):
     template_name = 'search_news.html'
 
 
-class CreateContent(LoginRequiredMixin, CreateView):
+class CreateContent(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
+    permission_required = ('news_portal.add_post',)
+
     form_class = PostForm
     model = Post
     template_name = 'edit_article_and_news.html'
@@ -46,6 +51,7 @@ class CreateContent(LoginRequiredMixin, CreateView):
     def form_valid(self, form):
         article = form.save(commit=False)
         article.content_type = self.type_of_content
+        article.posted_by = Author.objects.get(user=self.request.user)
         return super().form_valid(form)
 
 
@@ -57,7 +63,9 @@ class CreateNews(CreateContent):
     type_of_content = 'NW'
 
 
-class UpdateContent(LoginRequiredMixin, UpdateView):
+class UpdateContent(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
+    permission_required = ('news_portal.add_post',)
+
     form_class = PostForm
     model = Post
     template_name = ''
@@ -77,7 +85,9 @@ class UpdateNews(UpdateContent):
     type_of_content = 'NW'
 
 
-class DeleteContent(LoginRequiredMixin, DeleteView):
+class DeleteContent(LoginRequiredMixin, PermissionRequiredMixin, DeleteView):
+    permission_required = ('news_portal.add_post',)
+
     model = Post
     template_name = ''
     type_of_content = ''
@@ -95,6 +105,15 @@ class DeleteArticles(DeleteContent):
 class DeleteNews(DeleteContent):
     template_name = 'delete_article_and_news.html'
     type_of_content = 'NW'
+
+
+class BecomeAuthor(LoginRequiredMixin, TemplateView):
+    template_name = 'become_author.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['is_not_author'] = not self.request.user.groups.filter(name='authors').exists()
+        return context
 
 
 

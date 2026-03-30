@@ -46,7 +46,9 @@ INSTALLED_APPS = [
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
     'allauth.socialaccount.providers.yandex',
-    'news_portal'
+
+    'news_portal',
+    'sign',
 ]
 
 MIDDLEWARE = [

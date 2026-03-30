@@ -1,5 +1,6 @@
 from django.contrib import admin
-from .models import Category, Post, PostCategory
+from .models import Category, Post, PostCategory, Author
+
 
 # 1. Создаем Inline класс для связи
 class PostCategoryInline(admin.TabularInline):
@@ -14,3 +15,4 @@ class PostAdmin(admin.ModelAdmin):
 # 3. Регистрируем
 admin.site.register(Post, PostAdmin)
 admin.site.register(Category)
+admin.site.register(Author)
