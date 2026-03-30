@@ -1,3 +1,4 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from .filters import PostFilter
@@ -26,7 +27,7 @@ class NewsList(ListView):
         return self.filterset.qs
 
 
-class NewsDetailView(DetailView):
+class NewsDetailView(LoginRequiredMixin, DetailView):
     model = Post
     template_name = 'single_news.html'
     context_object_name = 'single_news'
@@ -36,7 +37,7 @@ class SearchNews(NewsList):
     template_name = 'search_news.html'
 
 
-class CreateContent(CreateView):
+class CreateContent(LoginRequiredMixin, CreateView):
     form_class = PostForm
     model = Post
     template_name = 'edit_article_and_news.html'
@@ -56,7 +57,7 @@ class CreateNews(CreateContent):
     type_of_content = 'NW'
 
 
-class UpdateContent(UpdateView):
+class UpdateContent(LoginRequiredMixin, UpdateView):
     form_class = PostForm
     model = Post
     template_name = ''
@@ -71,13 +72,12 @@ class UpdateArticles(UpdateContent):
     type_of_content = 'AT'
 
 
-
 class UpdateNews(UpdateContent):
     template_name = 'edit_article_and_news.html'
     type_of_content = 'NW'
 
 
-class DeleteContent(DeleteView):
+class DeleteContent(LoginRequiredMixin, DeleteView):
     model = Post
     template_name = ''
     type_of_content = ''
