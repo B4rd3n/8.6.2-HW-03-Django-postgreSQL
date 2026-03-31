@@ -1,6 +1,8 @@
 from django import template
 import re
 
+from news_portal.models import Category, Subscriber
+
 register = template.Library()
 
 CENSOR_WORDS = {"Удалось", "Если", "Позволить", "СлОжнЫЕ", "сегодня", "стал"}
@@ -25,5 +27,15 @@ def censor(value):
 @register.filter(name='has_group')
 def has_group(user, group_name):
     return user.groups.filter(name=group_name).exists()
+
+
+@register.filter(name='is_subscribed')
+def is_subscribed(user):
+    categories = Category.objects.count()
+    subscribed = Subscriber.objects.filter(user_sub=user).count()
+    return subscribed == categories
+
+
+
 
 

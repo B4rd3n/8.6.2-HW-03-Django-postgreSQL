@@ -51,6 +51,9 @@
                        {% endif %}
                        {% if user.is_authenticated %}
                           <li class="nav-item">
+                              <a class="nav-link" href="/news/subscriptions">Subscriptions</a>
+                          </li>
+                          <li class="nav-item">
                               <a class="nav-link" href="/accounts/logout">Log Out</a>
                           </li>
                        {% elif not user.is_authenticated %}

@@ -1,6 +1,6 @@
 from django import forms
 
-from .models import Post
+from .models import Post, Subscriber, Category
 
 
 class PostForm(forms.ModelForm):
@@ -10,3 +10,8 @@ class PostForm(forms.ModelForm):
                   'text',
                   'post_category']
 
+
+class SubscribeForm(forms.ModelForm):
+    class Meta:
+        model = Subscriber
+        fields = ['category']

@@ -1,0 +1,23 @@
+{% extends 'flatpages/default.html' %}
+
+{% load my_filters %}
+
+{% block content %}
+<br>
+<h1>Choose the category you want to Subscribe to:</h1>
+<h5>You'll receive notifications every time a new post appears in this category.</h5>
+<br>
+<hr>
+
+{% if user|is_subscribed %}
+    <h1>There are no more categories!</h1>
+{% else %}
+    <form action='' method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="Save"/>
+    </form>
+{% endif %}
+
+
+{% endblock content %}

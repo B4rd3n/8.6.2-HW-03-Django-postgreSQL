@@ -2,10 +2,9 @@ from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMix
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView, TemplateView
 from .filters import PostFilter
-from .forms import PostForm
-from .models import Author
-from django.shortcuts import redirect
-from django.contrib.auth.models import Group
+from .forms import PostForm, SubscribeForm
+from .models import Author, Subscriber, Category
+
 
 from .models import Post
 
@@ -127,6 +126,24 @@ class BecomeAuthor(LoginRequiredMixin, UserPassesTestMixin, TemplateView):
         is_author = self.request.user.groups.filter(name='authors').exists()
         return not is_author
 
+
+class Subscriptions(LoginRequiredMixin, CreateView):
+    form_class = SubscribeForm
+    model = Subscriber
+    template_name = 'subscriptions.html'
+    def get_form(self, form_class=None):
+        form = super().get_form(form_class)
+        user = self.request.user
+        subscribed = Subscriber.objects.filter(user_sub=user).values_list('category_id', flat=True)
+        form.fields.get('category').queryset = Category.objects.exclude(id__in=subscribed)
+        return form
+
+
+    def form_valid(self, form):
+        subscriber = form.save(commit=False)
+        subscriber.user_sub = self.request.user
+        subscriber.save()
+        return super().form_valid(form)
 
 
 

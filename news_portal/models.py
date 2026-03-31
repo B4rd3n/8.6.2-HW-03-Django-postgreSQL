@@ -29,6 +29,7 @@ class Author(models.Model):
 
 class Category(models.Model):
     name = models.CharField(max_length = 255, unique = True)
+    sub = models.ManyToManyField(User, through="Subscriber", related_name="subscribed_categories")
 
     def __str__(self):
         return self.name
@@ -83,5 +84,13 @@ class Comment(models.Model):
     def dislike(self):
         self.rating -= 1
         self.save()
+
+class Subscriber(models.Model):
+    user_sub = models.ForeignKey(User, on_delete = models.CASCADE)
+    category = models.ForeignKey(Category, on_delete = models.CASCADE)
+
+
+    def get_absolute_url(self):
+        return reverse('news_list')
 
 
