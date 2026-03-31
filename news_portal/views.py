@@ -1,6 +1,11 @@
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin, UserPassesTestMixin
+from django.contrib.auth.models import User
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView, TemplateView
+from django.core.mail import EmailMultiAlternatives
+from django.template.loader import render_to_string
+import time
+
 from .filters import PostFilter
 from .forms import PostForm, SubscribeForm
 from .models import Author, Subscriber, Category
@@ -47,10 +52,38 @@ class CreateContent(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
     template_name = 'edit_article_and_news.html'
     type_of_content = ''
 
+
+
+
     def form_valid(self, form):
         article = form.save(commit=False)
         article.content_type = self.type_of_content
         article.posted_by = Author.objects.get(user=self.request.user)
+
+        article.save()
+        form.save_m2m()
+
+        subscribers = User.objects.filter(subscribed_categories__post=article).distinct()
+
+        for user in subscribers:
+            html_content = render_to_string(
+                'post_created.html',
+                {
+                    'post': article,
+                    'user': user,
+                }
+            )
+
+            msg = EmailMultiAlternatives(
+                subject=f'Новая статья: {article.title}',
+                body=article.preview(),
+                from_email='B4rd3n20250@yandex.ru',
+                to=[user.email],
+            )
+            msg.attach_alternative(html_content, "text/html")
+            msg.send()
+            time.sleep(2)
+
         return super().form_valid(form)
 
 
