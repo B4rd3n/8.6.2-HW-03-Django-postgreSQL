@@ -13,6 +13,11 @@
 {% endif%}
 <hr>
 
+{% if form.non_field_errors %}
+    {{ error }}
+{% endif %}
+
+
 <form action='' method="post">
     {% csrf_token %}
     {{ form.as_p }}

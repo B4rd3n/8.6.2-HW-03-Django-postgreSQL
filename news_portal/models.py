@@ -42,6 +42,7 @@ class Post(models.Model):
     content_type = models.CharField(max_length=2, choices=POSITIONS)
     creation_time = models.DateTimeField(auto_now_add=True)
     posted_by = models.ForeignKey("Author", on_delete = models.CASCADE)
+    is_notified = models.BooleanField(default=False)
 
     post_category = models.ManyToManyField("Category", through = "PostCategory")
 
