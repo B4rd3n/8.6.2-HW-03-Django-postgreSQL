@@ -8,6 +8,10 @@ register = template.Library()
 CENSOR_WORDS = {"Удалось", "Если", "Позволить", "СлОжнЫЕ", "сегодня", "стал"}
 CENSOR_SET = {word.lower() for word in CENSOR_WORDS}
 
+# Задание 16.2.6
+FORBIDDEN_WORDS = {"Слово", "Смотреть", "Рассказывать", "Потому", "Если", "Первые", "Сезон"}
+FORBIDDEN_SET = {word.lower() for word in FORBIDDEN_WORDS}
+
 
 def censor_match(match):
     word = match.group()
@@ -16,6 +20,7 @@ def censor_match(match):
     return word
 
 
+# Этот фильтр цензуры используется для post.text в news.html
 @register.filter
 def censor(value):
     if not isinstance(value, str):
@@ -34,6 +39,25 @@ def is_subscribed(user):
     categories = Category.objects.count()
     subscribed = Subscriber.objects.filter(user_sub=user).count()
     return subscribed == categories
+
+
+# Задание 16.2.6 Этот фильтр цензуры используется для post.title в news.html
+@register.filter
+def new_censor(value):
+    words = value.split(" ")
+    for key, word in enumerate(words):
+        if word.lower() in FORBIDDEN_SET:
+            if len(word) <= 2:
+                new_word = "*" * len(word)
+            else:
+                new_word = word[0] + "*" * (len(word) - 2) + word[-1]
+            words.pop(key)
+            words.insert(key, new_word)
+
+    result = " ".join(words)
+    return result
+
+
 
 
 

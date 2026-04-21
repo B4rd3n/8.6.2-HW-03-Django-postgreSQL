@@ -21,7 +21,7 @@ All News
     {% if news %}
 
         {% for post in news %}
-            <h3>Title: {{ post.title|censor }}</h3>
+            <h3>Title: {{ post.title|new_censor }}</h3>
             <h3>Publication date: {{ post.creation_time|date:'d M Y' }}</h3>
             <h3>{{ post.text|truncatewords:20|censor }}</h3>
             <br>
