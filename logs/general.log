@@ -39,3 +39,6 @@ ZeroDivisionError: division by zero
 2026-04-25 19:39:48,270 INFO autoreload D:\Downloads\PyProjects\Module_D_Project\EndNewsPaper\news_portal\views.py changed, reloading.
 2026-04-25 19:39:49,082 INFO autoreload Watching for file changes with StatReloader
 2026-04-25 19:41:32,527 INFO autoreload Watching for file changes with StatReloader
+2026-04-25 19:49:36,750 INFO autoreload Watching for file changes with StatReloader
+2026-04-25 19:50:56,574 INFO autoreload Watching for file changes with StatReloader
+2026-04-25 19:51:02,803 INFO autoreload Watching for file changes with StatReloader

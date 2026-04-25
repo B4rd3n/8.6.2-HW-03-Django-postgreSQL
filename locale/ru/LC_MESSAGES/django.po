@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-04-25 14:48+0300\n"
+"POT-Creation-Date: 2026-04-25 19:50+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -20,27 +20,35 @@ msgstr ""
 "n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || "
 "(n%100>=11 && n%100<=14)? 2 : 3);\n"
 
+#: .\EndNewsPaper\settings.py:158
+msgid "Russian"
+msgstr ""
+
+#: .\EndNewsPaper\settings.py:159
+msgid "English"
+msgstr ""
+
 #: .\news_portal\filters.py:14
 msgctxt "category"
 msgid "Category name"
 msgstr "Категория"
 
-#: .\news_portal\models.py:54
+#: .\news_portal\models.py:53
 msgctxt "title"
 msgid "Title name"
 msgstr "Заголовок"
 
-#: .\news_portal\models.py:55
+#: .\news_portal\models.py:54
 msgctxt "text"
 msgid "Post text"
 msgstr "текст"
 
-#: .\news_portal\models.py:58
+#: .\news_portal\models.py:57
 msgctxt "creation_time"
 msgid "Creation time"
 msgstr "Время публикации"
 
-#: .\news_portal\models.py:62
+#: .\news_portal\models.py:61
 msgctxt "post_category"
 msgid "Categories"
 msgstr "Категории"
@@ -117,7 +125,7 @@ msgid "Write an Article"
 msgstr "Написать пост"
 
 #: .\templates\edit_article_and_news.html:10
-#: .\templates\flatpages\default.html:46
+#: .\templates\flatpages\default.html:67
 msgid "Create News"
 msgstr "Создать новость"
 
@@ -133,47 +141,59 @@ msgstr "Редактировать новость"
 msgid "Save"
 msgstr "Сохранить"
 
-#: .\templates\flatpages\default.html:33
+#: .\templates\flatpages\default.html:54
 msgid "News"
 msgstr "Новости"
 
-#: .\templates\flatpages\default.html:36
+#: .\templates\flatpages\default.html:57
 msgid "Search"
 msgstr "Поиск"
 
-#: .\templates\flatpages\default.html:43
+#: .\templates\flatpages\default.html:64
 msgid "Create Article"
 msgstr "Создать пост"
 
-#: .\templates\flatpages\default.html:50
+#: .\templates\flatpages\default.html:71
 msgid "Become an Author"
 msgstr "Стать автором"
 
-#: .\templates\flatpages\default.html:55
+#: .\templates\flatpages\default.html:76
 msgid "Subscriptions"
 msgstr "Подписки"
 
-#: .\templates\flatpages\default.html:58
+#: .\templates\flatpages\default.html:79
 msgid "Log Out"
 msgstr "Выйти"
 
-#: .\templates\flatpages\default.html:62
+#: .\templates\flatpages\default.html:83
 msgid "Log In"
 msgstr "Войти"
 
-#: .\templates\news.html:9
+#: .\templates\news.html:10
 msgid "All News"
 msgstr "Все Новости"
 
-#: .\templates\news.html:15
+#: .\templates\news.html:18
+msgid "Time zone:"
+msgstr "Часовой пояс:"
+
+#: .\templates\news.html:30
 msgid "Hot News"
 msgstr "Недавние Новости"
 
-#: .\templates\news.html:17
+#: .\templates\news.html:33
 msgid "News Amount:"
 msgstr "Количество новостей:"
 
-#: .\templates\news.html:33
+#: .\templates\news.html:46
+msgid "Title:"
+msgstr "Заголовок:"
+
+#: .\templates\news.html:47 .\templates\single_news.html:16
+msgid "Publication date:"
+msgstr "Дата публикации:"
+
+#: .\templates\news.html:54
 msgid "There is no news..."
 msgstr "Новостей нет..."
 
@@ -184,10 +204,6 @@ msgstr "Искать"
 #: .\templates\single_news.html:7
 msgid "This News"
 msgstr "Эта новость"
-
-#: .\templates\single_news.html:16
-msgid "Publication date:"
-msgstr "Дата публикации:"
 
 #: .\templates\socialaccount\login.html:11
 #, python-format
@@ -213,22 +229,22 @@ msgstr ""
 msgid "Continue"
 msgstr ""
 
-#: .\templates\subscriptions.html:8
+#: .\templates\subscriptions.html:9
 msgid "Choose the category you want to Subscribe to:"
 msgstr "Выберите категорию, на которую хотите подписаться:"
 
-#: .\templates\subscriptions.html:9
+#: .\templates\subscriptions.html:10
 msgid ""
 "You'll receive notifications every time a new post appears in this category."
 msgstr ""
 "Вы получите уведомление на почту, когда в выбранной категории появится новый "
 "пост."
 
-#: .\templates\subscriptions.html:14
+#: .\templates\subscriptions.html:15
 msgid "There are no more categories!"
 msgstr "Доступных категорий нет!"
 
-#: .\templates\subscriptions.html:19
+#: .\templates\subscriptions.html:20
 msgid "Subscribe!"
 msgstr "Подписаться!"
 
