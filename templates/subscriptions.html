@@ -1,21 +1,22 @@
 {% extends 'flatpages/default.html' %}
 
 {% load my_filters %}
+{% load i18n %}
 
 {% block content %}
 <br>
-<h1>Choose the category you want to Subscribe to:</h1>
-<h5>You'll receive notifications every time a new post appears in this category.</h5>
+<h1>{% trans "Choose the category you want to Subscribe to:" %}</h1>
+<h5>{% trans "You'll receive notifications every time a new post appears in this category." %}</h5>
 <br>
 <hr>
 
 {% if user|is_subscribed %}
-    <h1>There are no more categories!</h1>
+    <h1>{% trans "There are no more categories!" %}</h1>
 {% else %}
     <form action='' method="post">
         {% csrf_token %}
         {{ form.as_p }}
-        <input type="submit" value="Subscribe!"/>
+        <input type="submit" value='{% trans "Subscribe!" %}'/>
     </form>
 {% endif %}
 

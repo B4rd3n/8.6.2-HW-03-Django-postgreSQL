@@ -1,11 +1,13 @@
 {% extends 'flatpages/default.html' %}
 
+{% load i18n %}
+
 {% block content %}
     <form action="/news/" method="get">
         <table style="margin: 0 auto">
             {{ filterset.form.as_table }}
         </table>
-        <input type="submit" value="find" />
+        <input type="submit" value='{% trans "find" %}' />
     </form>
 
-{% endblock content %}
+{% endblock content %}с

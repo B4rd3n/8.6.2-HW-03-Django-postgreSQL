@@ -1,8 +1,10 @@
 {% extends 'flatpages/default.html' %}
 
+{% load i18n %}
+
 {% block content %}
-<h1>Do you want to become an author?</h1>
-<button> <a href="/sign/become_an_author/"> Yes, I want!</a> </button>
+<h1>{% trans "Do you want to become an author?" %}</h1>
+<button> <a href="/sign/become_an_author/"> {% trans "Yes, I want!" %}</a> </button>
 
 
 {% endblock content %}

@@ -5,3 +5,14 @@ Traceback (most recent call last):
   File "D:\Downloads\PyProjects\Module_D_Project\EndNewsPaper\news_portal\views.py", line 24, in test_logs
     1 / 0
 ZeroDivisionError: division by zero
+2026-04-25 12:24:09,813 INFO autoreload Watching for file changes with StatReloader
+2026-04-25 12:24:51,041 INFO autoreload Watching for file changes with StatReloader
+2026-04-25 12:25:00,754 INFO autoreload D:\Downloads\PyProjects\Module_D_Project\EndNewsPaper\news_portal\models.py changed, reloading.
+2026-04-25 12:25:01,536 INFO autoreload Watching for file changes with StatReloader
+2026-04-25 12:25:08,748 INFO autoreload D:\Downloads\PyProjects\Module_D_Project\EndNewsPaper\news_portal\views.py changed, reloading.
+2026-04-25 12:25:09,536 INFO autoreload Watching for file changes with StatReloader
+2026-04-25 12:25:45,179 INFO autoreload Watching for file changes with StatReloader
+2026-04-25 12:30:11,664 INFO autoreload Watching for file changes with StatReloader
+2026-04-25 12:30:17,783 INFO autoreload Watching for file changes with StatReloader
+2026-04-25 12:34:56,000 INFO autoreload D:\Downloads\PyProjects\Module_D_Project\EndNewsPaper\news_portal\views.py changed, reloading.
+2026-04-25 12:44:01,934 INFO autoreload Watching for file changes with StatReloader

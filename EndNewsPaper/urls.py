@@ -22,4 +22,5 @@ urlpatterns = [
     path('news/', include('news_portal.urls')),
     path('accounts/', include('allauth.urls')),
     path('sign/', include('sign.urls')),
+    path('i18n/', include('django.conf.urls.i18n')),
 ]

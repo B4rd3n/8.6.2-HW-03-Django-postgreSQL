@@ -3,6 +3,8 @@ from django.contrib.auth.models import User
 from django.db.models import Sum
 from django.urls import reverse
 from django.core.cache import cache
+from django.utils.translation import pgettext_lazy
+
 
 from .content_types import POSITIONS
 
@@ -48,15 +50,15 @@ class Category(models.Model):
 
 
 class Post(models.Model):
-    title = models.CharField(max_length = 255)
-    text = models.TextField()
+    title = models.CharField(max_length = 255, verbose_name=pgettext_lazy("title", "Title name"))
+    text = models.TextField(verbose_name=pgettext_lazy("text", "Post text"))
     rating = models.FloatField(default = 0)
     content_type = models.CharField(max_length=2, choices=POSITIONS)
-    creation_time = models.DateTimeField(auto_now_add=True)
+    creation_time = models.DateTimeField(auto_now_add=True, verbose_name=pgettext_lazy("creation_time", "Creation time"))
     posted_by = models.ForeignKey("Author", on_delete = models.CASCADE)
     is_notified = models.BooleanField(default=False)
 
-    post_category = models.ManyToManyField("Category", through = "PostCategory")
+    post_category = models.ManyToManyField("Category", through = "PostCategory", verbose_name=pgettext_lazy("post_category", "Categories"))
 
     def like(self):
         self.rating += 1
@@ -79,6 +81,12 @@ class Post(models.Model):
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)  # сначала вызываем метод родителя, чтобы объект сохранился
         cache.delete(f'post-{self.pk}')
+
+    def delete(self, *args, **kwargs):
+        cache_key = f'post-{self.pk}'
+        super().delete(*args, **kwargs)
+        cache.delete(cache_key)
+
 
 
 

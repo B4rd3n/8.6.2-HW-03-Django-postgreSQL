@@ -1,18 +1,19 @@
 {% extends 'flatpages/default.html' %}
 
+{% load i18n %}
+
 {% block content %}
+    {% if request.resolver_match.url_name == 'news_delete' %}
+        <h1>{% trans "Deleting News" %}</h1>
+    {% elif request.resolver_match.url_name == 'articles_delete' %}
+        <h1>{% trans "Deleting an Article" %}</h1>
+    {% endif %}
+    <hr>
 
-{% if request.resolver_match.url_name == 'news_delete' %}
-<h1>Deleting News</h1>
-{% elif request.resolver_match.url_name == 'articles_delete' %}
-<h1>Deleting an Article</h1>
-{% endif %}
-<hr>
-
-<form action="" method="post">
+    <form action="" method="post">
     {% csrf_token %}
-    <p>Delete "{{ object.title }}"?</p>
-    <input type="submit" value="Delete" />
+    <p>{% trans "Delete" %} "{{ object.title }}"?</p>
+    <input type="submit" value='{% trans "Delete" %}' />
 
 </form>
 {% endblock content %}
